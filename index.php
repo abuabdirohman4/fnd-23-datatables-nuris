@@ -6,15 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datatables</title>
 
-    <!-- Library JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
-
-    <!-- Libary CSS -->
+    <!-- Datatables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <!-- Datatables Button -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.bootstrap5.min.css">
+    
+    <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+
+    <style>
+        .download-table .dt-buttons{
+            float: right;
+        }
+        .download-table .dt-buttons .btn-secondary {
+            background-color: #FF6B00;
+            /* width: 15rem; */
+        }
+    </style>
+
 </head>
 <body>
     <div class="container">
@@ -47,11 +57,92 @@
         </table>
     </div>
 
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    
+    <!-- Bootstrap 5 -->
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+    
+    <!-- Datatables -->
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <!-- Button Datatables -->
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.colVis.min.js"></script>
+
     <script>
+        // $(document).ready(function() {
+        //     $("#example").DataTable();
+        // })
+
+        // $(document).ready(function() {
+        //     var table = $('#example').DataTable( {
+        //         // searching: false,
+        //         // dom: 'Bfrtip',
+        //         // "<'row'<'col-md-6'l><' col-md-6'f>>" +
+        //         // "<'row'<'col-sm-12'tr>>" +
+        //         // "<'row'<' col-md-5'i><' col-md-7'p>>",
+        //         // buttons: [
+        //         //     {
+        //         //         extends: 'excel',
+        //         //         text: 'Download',
+        //         //     }
+        //         // ]
+        //         dom: "lBtip",
+        //         buttons: [ 'excel' ]
+        //     } );
+        
+        //     // table.buttons().container()
+        //     //     .appendTo( '#example_wrapper .col-md-6:eq(0)' );
+        // } );
+
         $(document).ready(function() {
-            $("#example").DataTable();
-        })
+            var table = $('#example').DataTable( {
+                // lengthChange: false,
+                // "scrollX": true,
+                // dom: 'lBtip',
+                dom:
+                "<'row'<'col-md-11'f>>" +
+                "<'row'<'col-md-11'l><'col-md-1 download-table mb-2'B>>" +
+                "<'row'<'col-md-12'tr>>" +
+                "<'row'<' col-md-5'i><'col-md-7'p>>",
+                // buttons: [ 'excel']
+                buttons: [ {
+                        extend: 'excel',
+                        text: 'Download',
+                }]
+            } );
+        
+            table.buttons().container()
+                .appendTo( '#example_wrapper .col-md-6:eq(0)' );
+
+            var label = $("label")
+        } );
+
     </script>
+
+    <!-- <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "scrollX": true,
+                "searching": false,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        text: 'My button',
+                        action: function ( e, dt, node, config ) {
+                            alert( 'Button activated' );
+                        }
+                    }
+                ]
+            })
+        })
+    </script> -->
 
 </body>
 </html>
