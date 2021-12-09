@@ -16,6 +16,18 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
 
     <style>
+        div.dataTables_wrapper div.dataTables_filter {
+            float: left;
+            margin-bottom: 1rem;
+        }
+        div.dataTables_wrapper div.dataTables_filter input{
+            margin-left: 0;
+        }
+        div.dataTables_wrapper div.dataTables_filter button{
+            margin-left: 1rem;
+            background-color: #FF6B00;
+            color: white;
+        }
         .download-table .dt-buttons{
             float: right;
         }
@@ -76,46 +88,31 @@
     <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.colVis.min.js"></script>
 
     <script>
-        // $(document).ready(function() {
-        //     $("#example").DataTable();
-        // })
-
-        // $(document).ready(function() {
-        //     var table = $('#example').DataTable( {
-        //         // searching: false,
-        //         // dom: 'Bfrtip',
-        //         // "<'row'<'col-md-6'l><' col-md-6'f>>" +
-        //         // "<'row'<'col-sm-12'tr>>" +
-        //         // "<'row'<' col-md-5'i><' col-md-7'p>>",
-        //         // buttons: [
-        //         //     {
-        //         //         extends: 'excel',
-        //         //         text: 'Download',
-        //         //     }
-        //         // ]
-        //         dom: "lBtip",
-        //         buttons: [ 'excel' ]
-        //     } );
-        
-        //     // table.buttons().container()
-        //     //     .appendTo( '#example_wrapper .col-md-6:eq(0)' );
-        // } );
 
         $(document).ready(function() {
             var table = $('#example').DataTable( {
-                // lengthChange: false,
-                // "scrollX": true,
-                // dom: 'lBtip',
+                language: { search: "" },
                 dom:
                 "<'row'<'col-md-11'f>>" +
                 "<'row'<'col-md-11'l><'col-md-1 download-table mb-2'B>>" +
                 "<'row'<'col-md-12'tr>>" +
                 "<'row'<' col-md-5'i><'col-md-7'p>>",
-                // buttons: [ 'excel']
                 buttons: [ {
                         extend: 'excel',
                         text: 'Download',
-                }]
+                }],
+                
+                initComplete: function() {
+                    var input = $('.dataTables_filter input').unbind()
+                    self = this.api()
+                    $searchButton = $('<button class="btn">')
+                            .text('Search')
+                            .click(function() {
+                                self.search(input.val()).draw();
+                            })
+                    $('.dataTables_filter').append($searchButton)
+                }
+
             } );
         
             table.buttons().container()
@@ -125,24 +122,5 @@
         } );
 
     </script>
-
-    <!-- <script>
-        $(document).ready(function() {
-            $('#example').DataTable({
-                "scrollX": true,
-                "searching": false,
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        text: 'My button',
-                        action: function ( e, dt, node, config ) {
-                            alert( 'Button activated' );
-                        }
-                    }
-                ]
-            })
-        })
-    </script> -->
-
 </body>
 </html>
