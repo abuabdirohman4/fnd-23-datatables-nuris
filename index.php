@@ -97,11 +97,11 @@
                 "<'row'<'col-md-11'l><'col-md-1 download-table mb-2'B>>" +
                 "<'row'<'col-md-12'tr>>" +
                 "<'row'<' col-md-5'i><'col-md-7'p>>",
-                buttons: [ {
-                        extend: 'excel',
-                        text: 'Download',
-                }],
-                
+                // buttons: [ {
+                //         extend: 'excel',
+                //         text: 'Download',
+                // }],
+                buttons: ['colvis'],
                 initComplete: function() {
                     var input = $('.dataTables_filter input').unbind()
                     self = this.api()
